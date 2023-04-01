@@ -12,13 +12,13 @@ public class BlockController : MonoBehaviour
     void Start()
     {
         _piece = GetComponentInParent<PieceController>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,5 +26,10 @@ public class BlockController : MonoBehaviour
 
         if (collision.attachedRigidbody.ToString().Split(" ")[0] != "Block")
             _piece.CollisionDetected();
+    }
+
+    public void CreateNextCollision()
+    {
+        Debug.Log("Create next collision");
     }
 }

@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PieceController : MonoBehaviour
+public class PieceController : Piece
 {
 
 
     public bool IsActive = false;
 
-    [Tooltip("Generator of the level")]
-    private GeneratorController _generator;
+
 
     [SerializeField]
     [Tooltip("Time to wait before the player can move")]
@@ -33,6 +32,8 @@ public class PieceController : MonoBehaviour
     private double _timeToGo;
     [Tooltip("Can rotate")]
     private double _timeToRotate;
+    [Tooltip("If the block has arrived at the bottom")]
+    private bool _bottom = false;
     [Tooltip("If the block has reached the bottom and can't move down")]
     private bool _blocked = false;
 
@@ -40,8 +41,11 @@ public class PieceController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
+        Debug.Log("Sono stato generato");
         //Non funziona, chidere al prof
-        _generator = GetComponent<GeneratorController>();
+        //_generator = GetComponent<GeneratorController>();
 
         _timeToMove = _MoveDelay;
 
@@ -81,12 +85,13 @@ public class PieceController : MonoBehaviour
     private void MoveDown()
     {
 
-        if (!_blocked)
+        if (!_bottom)
             transform.position = Vector3.down * 1 + transform.position;
         else
         {
-            _generator.GenerateBlock();
-            IsActive = false;
+            SetBlocked(true);
+
+            GetGenerator().BlockStopped();
         }
 
 
@@ -108,11 +113,11 @@ public class PieceController : MonoBehaviour
         switch (direction)
         {
             case DirectionEnum.LEFT:
-                Debug.Log("Move Left");
+                //Debug.Log("Move Left");
                 transform.localPosition = transform.localPosition + Vector3.left * 1;
                 break;
             case DirectionEnum.RIGHT:
-                Debug.Log("Move Right");
+                //Debug.Log("Move Right");
                 transform.localPosition = transform.localPosition + Vector3.right * 1;
                 break;
         }
@@ -154,14 +159,20 @@ public class PieceController : MonoBehaviour
 
     public void CollisionDetected()
     {
-        Debug.Log("Collision detected");
-        SetBlocked(true);
-        Debug.Log("Blocked is: " + _blocked);
-        _generator.GenerateBlock();
+        //Debug.Log("Collision detected");
+        SetBottom(true);
+        //Debug.Log("Generator is: " + GetGenerator());
+
+        //GetGenerator().GenerateBlock();
     }
 
     private void SetBlocked(bool blocked)
     {
         _blocked = blocked;
+    }
+
+    private void SetBottom(bool bottom)
+    {
+        _bottom = bottom;
     }
 }

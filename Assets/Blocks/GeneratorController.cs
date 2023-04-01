@@ -9,8 +9,9 @@ public class GeneratorController : MonoBehaviour
     private GameObject _SpawnLocation;
 
     [SerializeField]
-    private GameObject _Line;
+    private Piece _Line;
 
+    private Piece _activePiece;
 
 
     private BlocksEnum _block = BlocksEnum.LINE;
@@ -20,28 +21,33 @@ public class GeneratorController : MonoBehaviour
     void Start()
     {
         GenerateBlock();
+        Instantiate(_Line, _SpawnLocation.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     //Instantiate the next block
-    public void GenerateBlock()
+    private void GenerateBlock()
     {
 
-        Debug.Log("Generate block");
 
         switch (_block)
         {
             case (BlocksEnum.LINE):
+                //_activePiece = Instantiate(_Line, _SpawnLocation.transform);
+                Debug.Log("Genero blocco");
                 Instantiate(_Line, _SpawnLocation.transform);
+                Debug.Log("Blocco generato");
+
+                //  _activePiece.SetGenerator(this);
                 break;
         }
 
         SelectBlock();
-            
+
     }
     //Select randomly which block will be the next
     private void SelectBlock()
@@ -52,5 +58,6 @@ public class GeneratorController : MonoBehaviour
     public void BlockStopped()
     {
         Debug.Log("Block stopped");
+        GenerateBlock();
     }
 }
