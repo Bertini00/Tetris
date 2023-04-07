@@ -37,13 +37,16 @@ public class PieceController : Piece
     [Tooltip("If the block has reached the bottom and can't move down")]
     private bool _blocked = false;
 
+    private bool _canMoveRight = true;
+    private bool _canMoveLeft = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
 
 
-        Debug.Log("Sono stato generato");
+        //Debug.Log("Sono stato generato");
         
         //SetGenerator(GetComponent<GeneratorController>());
 
@@ -84,6 +87,15 @@ public class PieceController : Piece
 
     private void MoveDown()
     {
+
+        foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
+        {
+            if (block._collided)
+            {
+                _bottom = true;
+                break;
+            }
+        }
 
         if (!_bottom)
             transform.position = Vector3.down * 1 + transform.position;
@@ -129,7 +141,7 @@ public class PieceController : Piece
         {
 
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight)
             {
                 MoveHorizontally(DirectionEnum.RIGHT);
                 _timeToMove = _MoveDelay;
@@ -138,8 +150,9 @@ public class PieceController : Piece
             {
                 MoveDown();
                 _timeToMove = _MoveDelay;
+                _timeToGo = _GoDelay;
             }
-            else if (Input.GetKey(KeyCode.LeftArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft)
             {
                 MoveHorizontally(DirectionEnum.LEFT);
                 _timeToMove = _MoveDelay;
@@ -157,14 +170,7 @@ public class PieceController : Piece
         }
     }
 
-    public void CollisionDetected()
-    {
-        //Debug.Log("Collision detected");
-        SetBottom(true);
-        //Debug.Log("Generator is: " + GetGenerator());
-
-        //GetGenerator().GenerateBlock();
-    }
+    
 
     private void SetBlocked(bool blocked)
     {
@@ -174,5 +180,24 @@ public class PieceController : Piece
     private void SetBottom(bool bottom)
     {
         _bottom = bottom;
+    }
+
+    public void SetCanMoveRight(bool value)
+    {
+        _canMoveRight = value;
+    }
+    public void SetCanMoveLeft(bool value)
+    {
+        _canMoveLeft = value;
+    }
+
+    public bool GetCanMoveRight()
+    {
+        return _canMoveRight;
+    }
+
+    public bool GetCanMoveLeft()
+    {
+        return _canMoveLeft;
     }
 }

@@ -56,7 +56,16 @@ public class GeneratorController : MonoBehaviour
 
     public void BlockStopped()
     {
-        Debug.Log("Block stopped");
+        //Debug.Log("Block stopped");
+        GenerateCollision();
         GenerateBlock();
+    }
+
+    public void GenerateCollision()
+    {
+        foreach (BlockController block in _activePiece.GetComponentsInChildren<BlockController>()){
+            //Debug.Log("Blocco trovato " + block);
+            block.CreateNextCollision();
+        }
     }
 }

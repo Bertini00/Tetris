@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8638036077505506826}
   - component: {fileID: 8638036077505506821}
   - component: {fileID: 8638036077505506824}
-  - component: {fileID: 1854065741191546327}
+  - component: {fileID: 3430158180783586335}
   m_Layer: 0
-  m_Name: SquareCollisionBox
+  m_Name: SquareCollisionRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1854065741191546327
+--- !u!114 &3430158180783586335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +143,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8638036077505506820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8563a9e844cd44e9e377b5351c2b87, type: 3}
+  m_Script: {fileID: 11500000, guid: eac202fbb09395b4d9a41a5b6448701d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
