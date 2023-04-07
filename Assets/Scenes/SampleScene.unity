@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 67098287853211561, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
       propertyPath: _Line
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -7033227494863580349, guid: 5ce080d43f316ed4f92fb32a6576338c, type: 3}
     - target: {fileID: 67098287853211561, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
       propertyPath: _SpawnLocation
       value: 
@@ -313,6 +313,14 @@ PrefabInstance:
     - target: {fileID: 8638036077505506820, guid: 0c8b038156370d448bf67c6e77a7b36d, type: 3}
       propertyPath: m_Name
       value: Square
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506826, guid: 0c8b038156370d448bf67c6e77a7b36d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506826, guid: 0c8b038156370d448bf67c6e77a7b36d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8638036077505506827, guid: 0c8b038156370d448bf67c6e77a7b36d, type: 3}
       propertyPath: m_RootOrder

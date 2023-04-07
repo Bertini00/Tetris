@@ -44,8 +44,8 @@ public class PieceController : Piece
 
 
         Debug.Log("Sono stato generato");
-        //Non funziona, chidere al prof
-        //_generator = GetComponent<GeneratorController>();
+        
+        //SetGenerator(GetComponent<GeneratorController>());
 
         _timeToMove = _MoveDelay;
 
@@ -60,23 +60,23 @@ public class PieceController : Piece
     void Update()
     {
         if (!IsActive) return;
-
+        
         if (_timeToGo <= 0 && !_blocked)
         {
             MoveDown();
             _timeToGo = _GoDelay;
         }
-
+        
         if (_timeToMove <= 0 && !_blocked)
         {
             InputMoveController();
         }
-
+        
         if (_timeToRotate <= 0 && !_blocked)
         {
             InputRotateController();
         }
-
+        
         _timeToGo -= Time.deltaTime;
         _timeToMove -= Time.deltaTime;
         _timeToRotate -= Time.deltaTime;

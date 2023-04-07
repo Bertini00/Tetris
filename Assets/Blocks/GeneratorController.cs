@@ -21,7 +21,7 @@ public class GeneratorController : MonoBehaviour
     void Start()
     {
         GenerateBlock();
-        Instantiate(_Line, _SpawnLocation.transform);
+        //Instantiate(_Line, _SpawnLocation.transform);
     }
 
     // Update is called once per frame
@@ -37,12 +37,11 @@ public class GeneratorController : MonoBehaviour
         switch (_block)
         {
             case (BlocksEnum.LINE):
-                //_activePiece = Instantiate(_Line, _SpawnLocation.transform);
-                Debug.Log("Genero blocco");
-                Instantiate(_Line, _SpawnLocation.transform);
-                Debug.Log("Blocco generato");
-
-                //  _activePiece.SetGenerator(this);
+                _activePiece = Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Blocco generato");
+                _activePiece.SetGenerator(this);
                 break;
         }
 
