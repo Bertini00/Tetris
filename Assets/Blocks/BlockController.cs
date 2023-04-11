@@ -13,6 +13,7 @@ public class BlockController : MonoBehaviour
     private SquareCollisionBox _CollisionBox;
 
     public bool _collided = false;
+
     
 
     // Start is called before the first frame update
@@ -32,12 +33,14 @@ public class BlockController : MonoBehaviour
     {
 
 
+
         if (collision.GetComponent<SquareCollisionBox>()?.GetType().ToString() == "SquareCollisionBox")
         {
             //Debug.Log("Collision detected " + collision.GetComponent<SquareCollisionBox>().GetType());
             //_piece.CollisionDetected();
             _collided = true;
         }
+         
             
     }
 
@@ -51,6 +54,7 @@ public class BlockController : MonoBehaviour
             //_piece.CollisionUndetected();
             _collided = false;
         }
+
 
     }
 

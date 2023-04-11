@@ -7,6 +7,8 @@ public class SquareCollisionBoxRL : MonoBehaviour
 
     private PieceController _piece;
 
+    private bool _entered = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class SquareCollisionBoxRL : MonoBehaviour
         
         if (collision.attachedRigidbody.ToString().Split(" ")[0] == "Block")
         {
-            Debug.Log(collision);
+            //Debug.Log(collision);
             if (this.transform.position.x - _piece.transform.position.x < 0)
             {
                 // Collision Left triggered
@@ -39,8 +41,10 @@ public class SquareCollisionBoxRL : MonoBehaviour
                 Debug.Log("Right touching");
                 _piece.SetCanMoveRight(false);
             }
-        }
             
+        }
+        _entered = true;
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -63,6 +67,8 @@ public class SquareCollisionBoxRL : MonoBehaviour
                 Debug.Log("Right not touching anymore");
                 _piece.SetCanMoveRight(true);
             }
+
+            _entered = false;
         }
 
     }

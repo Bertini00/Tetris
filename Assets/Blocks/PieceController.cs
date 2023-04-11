@@ -37,6 +37,8 @@ public class PieceController : Piece
     [Tooltip("If the block has reached the bottom and can't move down")]
     private bool _blocked = false;
 
+    private bool _canMoveHorizzontally = true;
+
     private bool _canMoveRight = true;
     private bool _canMoveLeft = true;
 
@@ -98,7 +100,12 @@ public class PieceController : Piece
         }
 
         if (!_bottom)
+        {
+            _canMoveHorizzontally = false;
             transform.position = Vector3.down * 1 + transform.position;
+            _canMoveHorizzontally = true;
+        }
+            
         else
         {
             SetBlocked(true);
@@ -122,17 +129,18 @@ public class PieceController : Piece
 
     private void MoveHorizontally(DirectionEnum direction)
     {
-        switch (direction)
-        {
-            case DirectionEnum.LEFT:
-                //Debug.Log("Move Left");
-                transform.localPosition = transform.localPosition + Vector3.left * 1;
-                break;
-            case DirectionEnum.RIGHT:
-                //Debug.Log("Move Right");
-                transform.localPosition = transform.localPosition + Vector3.right * 1;
-                break;
-        }
+        if (_canMoveHorizzontally)
+            switch (direction)
+            {
+                case DirectionEnum.LEFT:
+                    //Debug.Log("Move Left");
+                    transform.localPosition = transform.localPosition + Vector3.left * 1;
+                    break;
+                case DirectionEnum.RIGHT:
+                    //Debug.Log("Move Right");
+                    transform.localPosition = transform.localPosition + Vector3.right * 1;
+                    break;
+            }
     }
 
     private void InputMoveController()
