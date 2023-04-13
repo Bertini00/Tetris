@@ -26,6 +26,10 @@ public class BlockController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_piece == null)
+        {
+            _piece = GetComponentInParent<PieceController>();
+        }
 
     }
 
@@ -34,7 +38,7 @@ public class BlockController : MonoBehaviour
 
 
 
-        if (collision.GetComponent<SquareCollisionBox>()?.GetType().ToString() == "SquareCollisionBox")
+        if (collision.GetComponent<SquareCollisionBox>()?.GetType().ToString() == "SquareCollisionBox" && _piece != null)
         {
             //Debug.Log("Collision detected " + collision.GetComponent<SquareCollisionBox>().GetType());
             //_piece.CollisionDetected();
