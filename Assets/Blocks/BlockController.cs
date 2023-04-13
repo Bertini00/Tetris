@@ -39,6 +39,7 @@ public class BlockController : MonoBehaviour
             //Debug.Log("Collision detected " + collision.GetComponent<SquareCollisionBox>().GetType());
             //_piece.CollisionDetected();
             _collided = true;
+            _piece.SetBlockCollided(true);
         }
          
             

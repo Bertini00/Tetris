@@ -42,13 +42,15 @@ public class PieceController : Piece
     private bool _canMoveRight = true;
     private bool _canMoveLeft = true;
 
+    private bool _blockCollided = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
 
 
-        //Debug.Log("Sono stato generato");
+        
         
         //SetGenerator(GetComponent<GeneratorController>());
 
@@ -89,23 +91,29 @@ public class PieceController : Piece
 
     private void MoveDown()
     {
+        _canMoveHorizzontally = false;
+        //foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
+        //{
+        //    if (block._collided)
+        //    {
+        //        _bottom = true;
+        //        Debug.Log("Trovato bottom");
+        //        break;
+        //    }
+        //}
 
-        foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
+        if (_blockCollided)
         {
-            if (block._collided)
-            {
-                _bottom = true;
-                break;
-            }
+            _bottom = true;
         }
 
         if (!_bottom)
         {
-            _canMoveHorizzontally = false;
+            
             ResetMovementController();
             transform.position = Vector3.down * 1 + transform.position;
             _timeToMove = _MoveDelay;
-            _canMoveHorizzontally = true;
+            
         }
             
         else
@@ -114,7 +122,7 @@ public class PieceController : Piece
 
             GetGenerator().BlockStopped();
         }
-
+        _canMoveHorizzontally = true;
 
         //_blocked = true;
 
@@ -152,6 +160,7 @@ public class PieceController : Piece
         {
             if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight)
             {
+                ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.RIGHT);
                 _timeToMove = _MoveDelay;
             }
@@ -163,6 +172,7 @@ public class PieceController : Piece
             }
             else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft)
             {
+                ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.LEFT);
                 _timeToMove = _MoveDelay;
             }
@@ -214,5 +224,15 @@ public class PieceController : Piece
     {
         _canMoveLeft = true;
         _canMoveRight = true;
+    }
+
+    public void SetBlockCollided(bool collided)
+    {
+        _blockCollided = collided;
+    }
+
+    private void ResetBlockCollided()
+    {
+        _blockCollided = false;
     }
 }
