@@ -102,7 +102,9 @@ public class PieceController : Piece
         if (!_bottom)
         {
             _canMoveHorizzontally = false;
+            ResetMovementController();
             transform.position = Vector3.down * 1 + transform.position;
+            _timeToMove = _MoveDelay;
             _canMoveHorizzontally = true;
         }
             
@@ -130,6 +132,7 @@ public class PieceController : Piece
     private void MoveHorizontally(DirectionEnum direction)
     {
         if (_canMoveHorizzontally)
+            ResetMovementController();
             switch (direction)
             {
                 case DirectionEnum.LEFT:
@@ -147,8 +150,6 @@ public class PieceController : Piece
     {
         if (!_blocked)
         {
-
-
             if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight)
             {
                 MoveHorizontally(DirectionEnum.RIGHT);
@@ -207,5 +208,11 @@ public class PieceController : Piece
     public bool GetCanMoveLeft()
     {
         return _canMoveLeft;
+    }
+
+    private void ResetMovementController()
+    {
+        _canMoveLeft = true;
+        _canMoveRight = true;
     }
 }

@@ -65,4 +65,14 @@ public class BlockController : MonoBehaviour
         box.transform.Translate(0, 1, 0, Space.World);
         
     }
+
+    public void SetCanMoveLeft(bool canMoveLeft)
+    {
+        _piece.SetCanMoveLeft(canMoveLeft);
+    }
+
+    public void SetCanMoveRight(bool canMoveRight)
+    {
+        _piece.SetCanMoveRight(canMoveRight);
+    }
 }
