@@ -44,14 +44,17 @@ public class PieceController : Piece
 
     private bool _blockCollided = false;
 
+    private int _timesRotated = 0;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
 
 
-        
-        
+
+
         //SetGenerator(GetComponent<GeneratorController>());
 
         _timeToMove = _MoveDelay;
@@ -67,23 +70,23 @@ public class PieceController : Piece
     void Update()
     {
         if (!IsActive) return;
-        
+
         if (_timeToGo <= 0 && !_blocked)
         {
             MoveDown();
             _timeToGo = _GoDelay;
         }
-        
+
         if (_timeToMove <= 0 && !_blocked)
         {
             InputMoveController();
         }
-        
+
         if (_timeToRotate <= 0 && !_blocked)
         {
             InputRotateController();
         }
-        
+
         _timeToGo -= Time.deltaTime;
         _timeToMove -= Time.deltaTime;
         _timeToRotate -= Time.deltaTime;
@@ -109,13 +112,13 @@ public class PieceController : Piece
 
         if (!_bottom)
         {
-            
+
             ResetMovementController();
             transform.position = Vector3.down * 1 + transform.position;
             _timeToMove = _MoveDelay;
-            
+
         }
-            
+
         else
         {
             SetBlocked(true);
@@ -130,28 +133,24 @@ public class PieceController : Piece
 
     private void Rotate()
     {
-        // Debug.Log("Rotate");
-
         transform.Rotate(0, 0, 90);
-
-
     }
 
     private void MoveHorizontally(DirectionEnum direction)
     {
         if (_canMoveHorizzontally)
             ResetMovementController();
-            switch (direction)
-            {
-                case DirectionEnum.LEFT:
-                    //Debug.Log("Move Left");
-                    transform.localPosition = transform.localPosition + Vector3.left * 1;
-                    break;
-                case DirectionEnum.RIGHT:
-                    //Debug.Log("Move Right");
-                    transform.localPosition = transform.localPosition + Vector3.right * 1;
-                    break;
-            }
+        switch (direction)
+        {
+            case DirectionEnum.LEFT:
+                //Debug.Log("Move Left");
+                transform.localPosition = transform.localPosition + Vector3.left * 1;
+                break;
+            case DirectionEnum.RIGHT:
+                //Debug.Log("Move Right");
+                transform.localPosition = transform.localPosition + Vector3.right * 1;
+                break;
+        }
     }
 
     private void InputMoveController()
@@ -189,7 +188,7 @@ public class PieceController : Piece
         }
     }
 
-    
+
 
     private void SetBlocked(bool blocked)
     {
@@ -235,4 +234,6 @@ public class PieceController : Piece
     {
         _blockCollided = false;
     }
+
+
 }

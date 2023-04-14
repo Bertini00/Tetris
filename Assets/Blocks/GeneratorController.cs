@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GeneratorController : MonoBehaviour
@@ -10,10 +12,14 @@ public class GeneratorController : MonoBehaviour
 
     [SerializeField]
     private Piece _Line;
+    [SerializeField]
+    private Piece _Square;
+    [SerializeField]
+    private Piece _L;
 
     private Piece _activePiece;
 
-
+    private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L };
     private BlocksEnum _block = BlocksEnum.LINE;
 
 
@@ -41,9 +47,29 @@ public class GeneratorController : MonoBehaviour
                 //Debug.Log("Genero blocco");
                 //Instantiate(_Line, _SpawnLocation.transform);
                 //Debug.Log("Blocco generato");
-                _activePiece.SetGenerator(this);
+                _activePiece.SetPieceType(BlocksEnum.LINE);
                 break;
+
+            case (BlocksEnum.SQUARE):
+                _activePiece = Instantiate(_Square, _SpawnLocation.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Blocco generato");
+                _activePiece.SetPieceType(BlocksEnum.SQUARE);
+                break;
+            case (BlocksEnum.L):
+                _activePiece = Instantiate(_L, _SpawnLocation.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Blocco generato");
+                _activePiece.SetPieceType(BlocksEnum.L);
+                break;
+
         }
+
+        _activePiece.SetGenerator(this);
+
+
 
         SelectBlock();
 
@@ -51,7 +77,11 @@ public class GeneratorController : MonoBehaviour
     //Select randomly which block will be the next
     private void SelectBlock()
     {
-        _block = BlocksEnum.LINE;
+
+        int n = Random.Range(0, _blocks.Count());
+
+        _block = _blocks[n];
+        Debug.Log(_block.ToString());
     }
 
     public void BlockStopped()
@@ -63,7 +93,8 @@ public class GeneratorController : MonoBehaviour
 
     public void GenerateCollision()
     {
-        foreach (BlockController block in _activePiece.GetComponentsInChildren<BlockController>()){
+        foreach (BlockController block in _activePiece.GetComponentsInChildren<BlockController>())
+        {
             //Debug.Log("Blocco trovato " + block);
             block.CreateNextCollision();
         }

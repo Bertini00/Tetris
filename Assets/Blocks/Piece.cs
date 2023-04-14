@@ -8,6 +8,9 @@ public class Piece : MonoBehaviour
 
     [Tooltip("Generator of the level")]
     private GeneratorController _generator;
+
+    private BlocksEnum _pieceType;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,4 +34,11 @@ public class Piece : MonoBehaviour
     {
         Debug.Log(s);
     }
+
+    public void SetPieceType(BlocksEnum type)
+    {
+        _pieceType = type;
+    }
+
+    public BlocksEnum GetPieceType() { return _pieceType; }
 }
