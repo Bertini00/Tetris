@@ -9,8 +9,8 @@
 6. Rotations reset flag that blocks left and right movement, also collision of the bottom gets reset but not checked again - **Fixed**
 
 # Fixes
-1. Create a function that checks after being rotated if there are any collision, then try to move up, right, or left and check again, up to 3 times. When there is no collision accept the new location and move the block
-2. Replace the outer wall with something similar to the floor
+1. Create a function that checks after being rotated if there are any collision, then try to move up, right, or left and check again, up to 2 times. When there is no collision accept the new location and move the block
+2. Replace the outer wall with something similar to the floor, a wall made of block (now they trigger the collisions correctly)
 3. Just add the function to reset the flag (ResetCollision or something like that) at the start of the rotate function
 4. Check the collisions - Added a ? when checking the position of the collision
 5. The block was spawning one block over the top of the screen, if you held right or left it would go out of the screen into the abyss
