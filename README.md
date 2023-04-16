@@ -6,7 +6,7 @@
 3. Rotation doesn't reset the collisions flag - **Fixed**
 4. L piece can't move left when collision is right, something is wrong with the collision - **Fixed**
 5. If you spam left or right when there is a piece down, it doesn't spawn the next block - **Fixed**
-6. Rotations reset flag that blocks left and right movement, also collision of the bottom gets reset but not checked again **Fixed**
+6. Rotations reset flag that blocks left and right movement, also collision of the bottom gets reset but not checked again - **Fixed**
 
 # Fixes
 1. Create a function that checks after being rotated if there are any collision, then try to move up, right, or left and check again, up to 3 times. When there is no collision accept the new location and move the block
