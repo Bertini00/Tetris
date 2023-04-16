@@ -44,7 +44,6 @@ public class PieceController : Piece
 
     private bool _blockCollided = false;
 
-    private int _timesRotated = 0;
 
 
 
@@ -133,7 +132,28 @@ public class PieceController : Piece
 
     private void Rotate()
     {
+
         transform.Rotate(0, 0, 90);
+
+        bool lastMoveLeft = ResetMoveLeft();
+        bool lastMoveRight = ResetMoveRight();
+        bool lastBlockCollided = ResetBlockCollided();
+        //transform.Rotate(0, 0, 360);
+        if (!CanStay())
+        {
+            
+            transform.Rotate(0, 0, -90);
+
+            if (!FixPosition()) 
+            {
+                _canMoveLeft = lastMoveLeft;
+                _canMoveRight = lastMoveRight;
+                _blockCollided = lastBlockCollided;
+            }
+            
+        }
+
+
     }
 
     private void MoveHorizontally(DirectionEnum direction)
@@ -144,11 +164,11 @@ public class PieceController : Piece
         {
             case DirectionEnum.LEFT:
                 //Debug.Log("Move Left");
-                transform.localPosition = transform.localPosition + Vector3.left * 1;
+                transform.position = transform.position + Vector3.left * 1;
                 break;
             case DirectionEnum.RIGHT:
                 //Debug.Log("Move Right");
-                transform.localPosition = transform.localPosition + Vector3.right * 1;
+                transform.position = transform.position + Vector3.right * 1;
                 break;
         }
     }
@@ -223,6 +243,20 @@ public class PieceController : Piece
     {
         _canMoveLeft = true;
         _canMoveRight = true;
+        //Debug.Log("Reset can variable");
+    }
+
+    private bool ResetMoveRight()
+    {
+        bool temp = _canMoveRight;
+        _canMoveRight = true;
+        return temp;
+    }
+    private bool ResetMoveLeft()
+    {
+        bool temp = _canMoveLeft;
+        _canMoveLeft = true;
+        return temp;
     }
 
     public void SetBlockCollided(bool collided)
@@ -230,10 +264,78 @@ public class PieceController : Piece
         _blockCollided = collided;
     }
 
-    private void ResetBlockCollided()
+    private bool ResetBlockCollided()
     {
+        bool temp = _blockCollided;
         _blockCollided = false;
+        return temp;
     }
 
 
+    //Check if the rotate piece can stay in that position without triggering any collision
+    private bool CanStay()
+    {
+        foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
+        {
+            Collider2D occupant = Physics2D.OverlapBox(block.transform.position, Vector2.zero, 0f, LayerMask.GetMask("Block"));
+            if (occupant != null && occupant.transform.parent != transform)
+            {
+                Debug.Log("Occupant found, not myself");
+                //Debug.Log(occupant.transform.parent);
+                //Debug.Log(this);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Try to adjust position up to 2 times in each direction
+    private bool FixPosition()
+    {
+        //First checks up, then on the left and right
+        int[][] array = new int[8][] {
+            new int[3] { 0, 1, 0 },
+            new int[3] { -1, 1, 0 },
+            new int[3] { 1, 1, 0 },
+            new int[3] { 0, 2, 0 },
+            new int[3] { -1, 0, 0 },
+            new int[3] { 1, 0, 0 },
+            new int[3] { -2, 0, 0 },
+            new int[3] { 2, 0, 0 },
+        };
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            
+            transform.Translate(array[i][0], array[i][1], 0, Space.World);
+
+            if (!RotateAndCheck())
+            {
+                
+                transform.Translate(-array[i][0], -array[i][1], 0, Space.World);    
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    //Returns true if the piece can stay where it is
+    private bool RotateAndCheck()
+    {
+        
+        transform.Rotate(0, 0, 90);
+        if (!CanStay())
+        {
+            
+            transform.Rotate(0, 0, -90);
+            return false;
+        }
+        return true;
+    }
+
+    
 }

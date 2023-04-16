@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4379960999980608567}
   - component: {fileID: 7000316786006205784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -5845908028907724168}
   - component: {fileID: 5227144488884160574}
   - component: {fileID: 1980756231767308353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SquareCollisionRL
       objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8638036077505506827, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -256,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_Name
       value: SquareCollisionRL (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8638036077505506827, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_RootOrder
@@ -319,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SquareCollisionRL (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8638036077505506827, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -380,6 +392,10 @@ PrefabInstance:
     - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_Name
       value: SquareCollisionRL (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638036077505506820, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8638036077505506827, guid: 218985bb034400b41a2e5f3f29d4df50, type: 3}
       propertyPath: m_RootOrder

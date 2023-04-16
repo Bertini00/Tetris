@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8638036077505506821}
   - component: {fileID: 8638036077505506824}
   - component: {fileID: 3430158180783586335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SquareCollisionRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 8de0d359e5919274eb9542e27c55b53e, type: 3}
-  m_Color: {r: 0.7264151, g: 0.18160377, b: 0.18160377, a: 0}
+  m_Color: {r: 0.8113208, g: 0.14159843, b: 0.14159843, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

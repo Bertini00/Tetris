@@ -49,19 +49,6 @@ public class BlockController : MonoBehaviour
             
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-
-
-        if (collision.GetComponent<SquareCollisionBox>()?.GetType().ToString() == "SquareCollisionBox")
-        {
-            //Debug.Log("Collision detected " + collision.GetComponent<SquareCollisionBox>().GetType());
-            //_piece.CollisionUndetected();
-            _collided = false;
-        }
-
-
-    }
 
     public void CreateNextCollision()
     {
@@ -73,11 +60,13 @@ public class BlockController : MonoBehaviour
 
     public void SetCanMoveLeft(bool canMoveLeft)
     {
-        _piece.SetCanMoveLeft(canMoveLeft);
+        _piece?.SetCanMoveLeft(canMoveLeft);
     }
 
     public void SetCanMoveRight(bool canMoveRight)
     {
-        _piece.SetCanMoveRight(canMoveRight);
+        _piece?.SetCanMoveRight(canMoveRight);
     }
+
+    
 }

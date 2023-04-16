@@ -30,24 +30,33 @@ public class SquareCollisionBoxRL : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
         if (collision.attachedRigidbody.ToString().Split(" ")[0] == "Block" && _block != null && collision.transform.parent != _block.transform.parent)
         {
-            //Debug.Log(transform.position.x);
-            //Debug.Log(_block.transform.position.x);
-            if (transform.position.x - _block.transform.position.x < 0)
+            //Debug.Log("Collision detected");
+            //Debug.Log("--------------");
+            //Debug.Log(_block.name);
+            //Debug.Log(collision);
+            //Debug.Log(_block);
+            //Debug.Log(collision.transform.parent);
+            //Debug.Log(_block.transform.parent);
+            //Debug.Log(_block.transform.parent == collision.transform.parent);
+            //Debug.Log("--------------");
+            if (transform.position.x - _block.transform.position.x < -0.1)
             {
                 // Collision Left triggered
                 //Debug.Log("Left touching");
                 _block.SetCanMoveLeft(false);
 
             }
-            else if (transform.position.x - _block.transform.position.x > 0)
+            else if (transform.position.x - _block.transform.position.x > 0.1)
             {
                 // Collision Right triggered
                 //Debug.Log("Right touching");
                 _block.SetCanMoveRight(false);
+            }
+            else
+            {
+                //Debug.Log("Error collision");
             }
         }
 
