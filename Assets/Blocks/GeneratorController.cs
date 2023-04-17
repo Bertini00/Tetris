@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,17 +21,47 @@ public class GeneratorController : MonoBehaviour
     private Piece _LMirrored;
     [SerializeField]
     private Piece _T;
+    [SerializeField]
+    private Piece _TwoTwo;
 
     private Piece _activePiece;
 
-    private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T };
+    private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO };
     //private BlocksEnum[] _blocks = { BlocksEnum.LINE };
     private BlocksEnum _block = BlocksEnum.LINE;
+
+    private List<List<BlockController>> _blockStopped = new List<List<BlockController>>();
+
+
+    public event Action MoveDownBlocks;
+    public int RowDeleted;
+
+    public void NotifyBlocksDown(int row)
+    {
+        RowDeleted = row;
+        MoveDownBlocks?.Invoke();
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //Setup the list
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        _blockStopped.Add(new List<BlockController> { });
+        
+        
         GenerateBlock();
         //Instantiate(_Line, _SpawnLocation.transform);
     }
@@ -83,6 +114,13 @@ public class GeneratorController : MonoBehaviour
                 //Debug.Log("Blocco generato");
                 _activePiece.SetPieceType(BlocksEnum.T);
                 break;
+            case (BlocksEnum.TWOTWO):
+                _activePiece = Instantiate(_TwoTwo, _SpawnLocation.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Blocco generato");
+                _activePiece.SetPieceType(BlocksEnum.TWOTWO);
+                break;
 
         }
 
@@ -97,16 +135,18 @@ public class GeneratorController : MonoBehaviour
     private void SelectBlock()
     {
 
-        int n = Random.Range(0, _blocks.Count());
+        int n = UnityEngine.Random.Range(0, _blocks.Count());
 
         _block = _blocks[n];
-        Debug.Log(_block.ToString());
+        //Debug.Log(_block.ToString());
     }
 
-    public void BlockStopped()
+    public void BlockStopped(PieceController piece)
     {
         //Debug.Log("Block stopped");
         GenerateCollision();
+        AddBlocksToArray(piece);
+        
         GenerateBlock();
     }
 
@@ -117,5 +157,64 @@ public class GeneratorController : MonoBehaviour
             //Debug.Log("Blocco trovato " + block);
             block.CreateNextCollision();
         }
+    }
+
+    private void AddBlocksToArray(PieceController piece)
+    {
+        //Debug.Log("Block stopped dimension " + _blockStopped.Count);
+        List<int> rows = new List<int>();
+        foreach (BlockController block in piece.GetComponentsInChildren<BlockController>())
+        {
+            //Debug.Log(block);
+            //y+4.5
+            int currY = (int)System.Math.Round(block.transform.position.y + 4.5);
+            //Debug.Log(currY);
+            _blockStopped[currY].Add(block);
+            //Debug.Log(_blockStopped[currY].Count);
+            if (_blockStopped[currY].Count == 10)
+            {
+                //Debug.Log("Row Completed");
+                rows.Add(currY);
+            }
+        }
+
+        if (rows.Count > 0)
+        {
+            DeleteRows(rows);
+        }
+    }
+
+    private void DeleteRows(List<int> rows)
+    {
+        int temp = 0;
+        foreach (int row in rows)
+        {
+            foreach (BlockController block in _blockStopped[row])
+            {
+                Destroy(block.gameObject);
+            }
+            NotifyBlocksDown(row - temp);
+            ++temp;
+        }
+
+        RearrengeRows(rows);
+    }
+
+    private void RearrengeRows(List<int> rows)
+    {
+        List<List<BlockController>> temp = new();
+        for (int i = 0; i < _blockStopped.Count; i++)
+        {
+            if (!rows.Contains(i))
+            {
+                temp.Add(_blockStopped[i]);
+            }
+        }
+        for (int i = 0; i < rows.Count; i++)
+        {
+            temp.Add(new List<BlockController>());
+        }
+        
+        _blockStopped = temp;
     }
 }

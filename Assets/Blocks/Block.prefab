@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _CollisionBox: {fileID: 1854065741191546327, guid: 0c8b038156370d448bf67c6e77a7b36d, type: 3}
   _collided: 0
+  _generator: {fileID: 67098287853211561, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
 --- !u!1001 &496682384302959686
 PrefabInstance:
   m_ObjectHideFlags: 0

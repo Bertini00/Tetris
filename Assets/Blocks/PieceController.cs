@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PieceController : Piece
@@ -41,19 +42,24 @@ public class PieceController : Piece
 
     private bool _canMoveRight = true;
     private bool _canMoveLeft = true;
+    private bool _canMoveDown = true;
+    private bool _canRotate = true;
 
     private bool _blockCollided = false;
 
 
 
 
+    
     // Start is called before the first frame update
     void Start()
     {
 
-
-
-
+        if (!CheckSpawnPosition())
+        {
+            Debug.Log("Cant spawn block, quitting");
+            Application.Quit();
+        }
         //SetGenerator(GetComponent<GeneratorController>());
 
         _timeToMove = _MoveDelay;
@@ -94,16 +100,8 @@ public class PieceController : Piece
     private void MoveDown()
     {
         _canMoveHorizzontally = false;
-        //foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
-        //{
-        //    if (block._collided)
-        //    {
-        //        _bottom = true;
-        //        Debug.Log("Trovato bottom");
-        //        break;
-        //    }
-        //}
-
+        _canRotate = false;
+        
         if (_blockCollided)
         {
             _bottom = true;
@@ -115,6 +113,12 @@ public class PieceController : Piece
             ResetMovementController();
             transform.position = Vector3.down * 1 + transform.position;
             _timeToMove = _MoveDelay;
+            
+            if (!CanStay())
+            {
+                
+                FixPosition();    
+            }
 
         }
 
@@ -122,9 +126,10 @@ public class PieceController : Piece
         {
             SetBlocked(true);
 
-            GetGenerator().BlockStopped();
+            GetGenerator().BlockStopped(this);
         }
         _canMoveHorizzontally = true;
+        _canRotate = true;
 
         //_blocked = true;
 
@@ -132,7 +137,8 @@ public class PieceController : Piece
 
     private void Rotate()
     {
-
+        _canMoveHorizzontally = false;
+        _canMoveDown = false;
         transform.Rotate(0, 0, 90);
 
         bool lastMoveLeft = ResetMoveLeft();
@@ -153,23 +159,27 @@ public class PieceController : Piece
             
         }
 
+        _canMoveHorizzontally = true;
+        _canMoveDown = true;
 
     }
 
     private void MoveHorizontally(DirectionEnum direction)
     {
         if (_canMoveHorizzontally)
-            ResetMovementController();
-        switch (direction)
         {
-            case DirectionEnum.LEFT:
-                //Debug.Log("Move Left");
-                transform.position = transform.position + Vector3.left * 1;
-                break;
-            case DirectionEnum.RIGHT:
-                //Debug.Log("Move Right");
-                transform.position = transform.position + Vector3.right * 1;
-                break;
+            ResetMovementController();
+            switch (direction)
+            {
+                case DirectionEnum.LEFT:
+                    //Debug.Log("Move Left");
+                    transform.position = transform.position + Vector3.left * 1;
+                    break;
+                case DirectionEnum.RIGHT:
+                    //Debug.Log("Move Right");
+                    transform.position = transform.position + Vector3.right * 1;
+                    break;
+            }
         }
     }
 
@@ -177,31 +187,33 @@ public class PieceController : Piece
     {
         if (!_blocked)
         {
-            if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight)
+            _canRotate = false;
+            if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight && _canMoveHorizzontally)
             {
                 ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.RIGHT);
                 _timeToMove = _MoveDelay;
             }
-            else if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.DownArrow) && _canMoveDown)
             {
                 MoveDown();
                 _timeToMove = _MoveDelay;
                 _timeToGo = _GoDelay;
             }
-            else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft)
+            else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft && _canMoveHorizzontally)
             {
                 ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.LEFT);
                 _timeToMove = _MoveDelay;
             }
+            _canRotate = true;
         }
     }
 
     private void InputRotateController()
     {
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && _canRotate)
         {
             Rotate();
             _timeToRotate = _RotateDelay;
@@ -277,13 +289,18 @@ public class PieceController : Piece
     {
         foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
         {
-            Collider2D occupant = Physics2D.OverlapBox(block.transform.position, Vector2.zero, 0f, LayerMask.GetMask("Block"));
-            if (occupant != null && occupant.transform.parent != transform)
+            Collider2D[] occupants = Physics2D.OverlapBoxAll(block.transform.position, Vector2.zero, 0f, LayerMask.GetMask("Block"));
+
+            foreach (Collider2D occupant in occupants)
             {
-                Debug.Log("Occupant found, not myself");
-                //Debug.Log(occupant.transform.parent);
-                //Debug.Log(this);
-                return false;
+                if (occupant != null && occupant.transform.parent != transform)
+                {
+                    //Debug.Log("Occupant found, not myself");
+                    //Debug.Log(occupant.transform.parent);
+                    //Debug.Log(this);
+                    return false;
+                }
+                
             }
         }
         return true;
@@ -337,5 +354,21 @@ public class PieceController : Piece
         return true;
     }
 
-    
+    private bool CheckSpawnPosition()
+    {
+        Collider2D[] occupants = Physics2D.OverlapBoxAll(transform.position, Vector2.zero, 0f, LayerMask.GetMask("Block"));
+
+        foreach (Collider2D occupant in occupants)
+        {
+            if (occupant != null && occupant.transform.parent != transform)
+            {
+                Debug.Log("Occupant found, not myself");
+                //Debug.Log(occupant.transform.parent);
+                //Debug.Log(this);
+                return false;
+            }
+            
+        }
+        return true;
+    }
 }

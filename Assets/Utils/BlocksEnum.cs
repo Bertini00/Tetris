@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum BlocksEnum 
 {
-    LINE, SQUARE, L, LMIRRORED, T
+    LINE, SQUARE, L, LMIRRORED, T, TWOTWO
 }
