@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &583803803498474863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8985562875944132389}
+  - component: {fileID: -7872244206658571747}
+  m_Layer: 0
+  m_Name: Gen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8985562875944132389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583803803498474863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7872244206658571747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583803803498474863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07f14f5c38089e46b5a26d163d171c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpawnLocation: {fileID: 0}
+  _Line: {fileID: -7033227494863580349, guid: 5ce080d43f316ed4f92fb32a6576338c, type: 3}
+  _Square: {fileID: -2109451541997319437, guid: 29dc1a8229496d246ad853cb5a7d03eb, type: 3}
+  _L: {fileID: 1756589364901004010, guid: e681f70cdea62fc47ab81963d961d972, type: 3}
+  _LMirrored: {fileID: -5572407783093832338, guid: 4b7bf43e2096dca498a58d822da3baaa, type: 3}
+  _T: {fileID: -308634413861957673, guid: 0f7366579ea5a38459f057b5be88ab52, type: 3}
+  _TwoTwo: {fileID: 3087883168490198964, guid: 32cee73f7af8373429aa5fd66ebf3114, type: 3}
+  _TwoTwoMirrored: {fileID: 1561466042159851182, guid: 8c7d24194cc9fad4bbdd6962a1d4c4f9, type: 3}
+  RowDeleted: 0
