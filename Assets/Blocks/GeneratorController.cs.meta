@@ -8,6 +8,9 @@ MonoImporter:
   - _Line: {fileID: -7033227494863580349, guid: 5ce080d43f316ed4f92fb32a6576338c, type: 3}
   - _Square: {fileID: -2109451541997319437, guid: 29dc1a8229496d246ad853cb5a7d03eb, type: 3}
   - _L: {fileID: 1756589364901004010, guid: e681f70cdea62fc47ab81963d961d972, type: 3}
+  - _LMirrored: {fileID: 1756589364901004010, guid: ed6964f5d974ef14f89d8ba6814d2ca8, type: 3}
+  - _T: {fileID: 1756589364901004010, guid: f1c485d082d9e28409e15dabdb6059a9, type: 3}
+  - _TwoTwo: {fileID: 1756589364901004010, guid: 32cee73f7af8373429aa5fd66ebf3114, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
