@@ -30,7 +30,8 @@ public class SquareCollisionBoxRL : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.attachedRigidbody.ToString().Split(" ")[0] == "Block" && _block != null && collision.transform.parent != _block.transform.parent)
+        //Debug.Log(collision.GetComponent<BlockController>());
+        if (collision.GetComponent<BlockController>() != null && _block != null && collision.transform.parent != _block.transform.parent)
         {
             //Debug.Log("Collision detected");
             //Debug.Log("--------------");

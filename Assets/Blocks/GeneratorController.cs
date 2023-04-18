@@ -28,7 +28,7 @@ public class GeneratorController : MonoBehaviour
 
     private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO };
     //private BlocksEnum[] _blocks = { BlocksEnum.LINE };
-    private BlocksEnum _block = BlocksEnum.LINE;
+    private BlocksEnum _block = BlocksEnum.TWOTWO;
 
     private List<List<BlockController>> _blockStopped = new List<List<BlockController>>();
 

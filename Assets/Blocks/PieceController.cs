@@ -33,6 +33,8 @@ public class PieceController : Piece
     private double _timeToGo;
     [Tooltip("Can rotate")]
     private double _timeToRotate;
+    [Tooltip("Input Delay")]
+    private double _inputDelay;
     [Tooltip("If the block has arrived at the bottom")]
     private bool _bottom = false;
     [Tooltip("If the block has reached the bottom and can't move down")]
@@ -57,7 +59,7 @@ public class PieceController : Piece
 
         if (!CheckSpawnPosition())
         {
-            Debug.Log("Cant spawn block, quitting");
+            //Debug.Log("Cant spawn block, quitting");
             Application.Quit();
         }
         //SetGenerator(GetComponent<GeneratorController>());
@@ -68,7 +70,13 @@ public class PieceController : Piece
 
         _timeToRotate = _RotateDelay;
 
+        _inputDelay = 0.05;
 
+    }
+
+    private void ResetInputDelay()
+    {
+        _inputDelay = 0.05;
     }
 
     // Update is called once per frame
@@ -76,25 +84,30 @@ public class PieceController : Piece
     {
         if (!IsActive) return;
 
-        if (_timeToGo <= 0 && !_blocked)
+        if (_inputDelay <= 0)
         {
-            MoveDown();
-            _timeToGo = _GoDelay;
-        }
+            if (_timeToGo <= 0 && !_blocked)
+            {
+                MoveDown();
+                _timeToGo = _GoDelay;
+                ResetInputDelay();
+            }
 
-        if (_timeToMove <= 0 && !_blocked)
-        {
-            InputMoveController();
-        }
+            if (_timeToMove <= 0 && !_blocked)
+            {
+                InputMoveController();
+            }
 
-        if (_timeToRotate <= 0 && !_blocked)
-        {
-            InputRotateController();
+            if (_timeToRotate <= 0 && !_blocked)
+            {
+                InputRotateController();
+            }
         }
 
         _timeToGo -= Time.deltaTime;
         _timeToMove -= Time.deltaTime;
         _timeToRotate -= Time.deltaTime;
+        _inputDelay -= Time.deltaTime;
     }
 
     private void MoveDown()
@@ -149,14 +162,23 @@ public class PieceController : Piece
         {
             
             transform.Rotate(0, 0, -90);
-
+            _canMoveLeft = lastMoveLeft;
+            _canMoveRight = lastMoveRight;
+            _blockCollided = lastBlockCollided;
+            Debug.Log("Fixing position");
             if (!FixPosition()) 
             {
+                //Debug.Log("Can move reset");
+                Debug.Log("Position fixed");
                 _canMoveLeft = lastMoveLeft;
                 _canMoveRight = lastMoveRight;
                 _blockCollided = lastBlockCollided;
             }
             
+        }
+        else
+        {
+            Debug.Log("Can rotate and rotated");
         }
 
         _canMoveHorizzontally = true;
@@ -193,18 +215,21 @@ public class PieceController : Piece
                 ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.RIGHT);
                 _timeToMove = _MoveDelay;
+                ResetInputDelay();
             }
             else if (Input.GetKey(KeyCode.DownArrow) && _canMoveDown)
             {
                 MoveDown();
                 _timeToMove = _MoveDelay;
                 _timeToGo = _GoDelay;
+                ResetInputDelay();
             }
             else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft && _canMoveHorizzontally)
             {
                 ResetBlockCollided();
                 MoveHorizontally(DirectionEnum.LEFT);
                 _timeToMove = _MoveDelay;
+                ResetInputDelay();
             }
             _canRotate = true;
         }
@@ -215,8 +240,15 @@ public class PieceController : Piece
 
         if (Input.GetKey(KeyCode.UpArrow) && _canRotate)
         {
+            _canMoveHorizzontally = false;
+            _canMoveDown = false;
+
             Rotate();
             _timeToRotate = _RotateDelay;
+            ResetInputDelay();
+
+            _canMoveHorizzontally = true;
+            _canMoveDown = true;
         }
     }
 
@@ -293,10 +325,12 @@ public class PieceController : Piece
 
             foreach (Collider2D occupant in occupants)
             {
+                //Debug.Log("CanStay");
+                //Debug.Log(occupant);
                 if (occupant != null && occupant.transform.parent != transform)
                 {
                     //Debug.Log("Occupant found, not myself");
-                    //Debug.Log(occupant.transform.parent);
+                    //Debug.Log(occupant);
                     //Debug.Log(this);
                     return false;
                 }
@@ -309,6 +343,7 @@ public class PieceController : Piece
     //Try to adjust position up to 2 times in each direction
     private bool FixPosition()
     {
+        
         //First checks up, then on the left and right
         int[][] array = new int[8][] {
             new int[3] { 0, 1, 0 },
@@ -333,9 +368,12 @@ public class PieceController : Piece
             }
             else
             {
+                //Debug.Log("Position found");
+                
                 return true;
             }
         }
+        
         return false;
 
     }

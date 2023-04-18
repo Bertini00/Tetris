@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (1)
+      value: TwoTwoBlock (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7000316786006205784, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Color.b
@@ -179,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (2)
+      value: TwoTwoBlock (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7000316786006205784, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Color.b
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (3)
+      value: TwoTwoBlock (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7000316786006205784, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Color.b
@@ -327,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block
+      value: TwoTwoBlock
       objectReference: {fileID: 0}
     - target: {fileID: 7000316786006205784, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Color.b

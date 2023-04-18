@@ -167,7 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (5)
+      value: WallBlock (5)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -253,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (6)
+      value: WallBlock (6)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (3)
+      value: WallBlock (3)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (9)
+      value: WallBlock (9)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -511,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (1)
+      value: WallBlock (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -597,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block
+      value: WallBlock
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -683,7 +683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (4)
+      value: WallBlock (4)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -769,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (2)
+      value: WallBlock (2)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -855,7 +855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (8)
+      value: WallBlock (8)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Name
-      value: Block (7)
+      value: WallBlock (7)
       objectReference: {fileID: 0}
     - target: {fileID: 3154119937091887843, guid: 82cd3344a7a46e64a9c06962001ee8ea, type: 3}
       propertyPath: m_Layer
