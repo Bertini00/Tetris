@@ -11,7 +11,7 @@ MonoImporter:
   - _LMirrored: {fileID: -5572407783093832338, guid: 4b7bf43e2096dca498a58d822da3baaa, type: 3}
   - _T: {fileID: -308634413861957673, guid: 0f7366579ea5a38459f057b5be88ab52, type: 3}
   - _TwoTwo: {fileID: 3087883168490198964, guid: 32cee73f7af8373429aa5fd66ebf3114, type: 3}
-  - _TwoTwoMirrored: {instanceID: 0}
+  - _TwoTwoMirrored: {fileID: 1561466042159851182, guid: 8c7d24194cc9fad4bbdd6962a1d4c4f9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
