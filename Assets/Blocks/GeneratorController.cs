@@ -23,10 +23,12 @@ public class GeneratorController : MonoBehaviour
     private Piece _T;
     [SerializeField]
     private Piece _TwoTwo;
+    [SerializeField]
+    private Piece _TwoTwoMirrored;
 
     private Piece _activePiece;
 
-    private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO };
+    private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO, BlocksEnum.TWOTWOMIRRORED };
     //private BlocksEnum[] _blocks = { BlocksEnum.LINE };
     private BlocksEnum _block = BlocksEnum.TWOTWO;
 
@@ -121,6 +123,13 @@ public class GeneratorController : MonoBehaviour
                 //Instantiate(_Line, _SpawnLocation.transform);
                 //Debug.Log("Blocco generato");
                 _activePiece.SetPieceType(BlocksEnum.TWOTWO);
+                break;
+            case (BlocksEnum.TWOTWOMIRRORED):
+                _activePiece = Instantiate(_TwoTwoMirrored, _SpawnLocation.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocation.transform);
+                //Debug.Log("Blocco generato");
+                _activePiece.SetPieceType(BlocksEnum.TWOTWOMIRRORED);
                 break;
 
         }
