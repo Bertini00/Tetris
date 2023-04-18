@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3038283226415414905}
-  - component: {fileID: -5248523944892690987}
+  - component: {fileID: 5438422874946193385}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5248523944892690987
+--- !u!114 &5438422874946193385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,8 +48,8 @@ MonoBehaviour:
   _Line: {fileID: -7033227494863580349, guid: 5ce080d43f316ed4f92fb32a6576338c, type: 3}
   _Square: {fileID: -2109451541997319437, guid: 29dc1a8229496d246ad853cb5a7d03eb, type: 3}
   _L: {fileID: 1756589364901004010, guid: e681f70cdea62fc47ab81963d961d972, type: 3}
-  _LMirrored: {fileID: -5572407783093832338, guid: 3b19469dcab049f429910595a1ac43fe, type: 3}
-  _T: {fileID: -308634413861957673, guid: 269397910e83cac419695682eb73afd1, type: 3}
-  _TwoTwo: {fileID: 3087883168490198964, guid: 0b240bb75b771e7428908544c9201ba1, type: 3}
-  _TwoTwoMirrored: {fileID: 1561466042159851182, guid: b79f172cbcf2d714a8a80326b9c5f5f8, type: 3}
+  _LMirrored: {fileID: -5572407783093832338, guid: 4b7bf43e2096dca498a58d822da3baaa, type: 3}
+  _T: {fileID: -308634413861957673, guid: 0f7366579ea5a38459f057b5be88ab52, type: 3}
+  _TwoTwo: {fileID: 3087883168490198964, guid: 32cee73f7af8373429aa5fd66ebf3114, type: 3}
+  _TwoTwoMirrored: {fileID: 1561466042159851182, guid: 8c7d24194cc9fad4bbdd6962a1d4c4f9, type: 3}
   RowDeleted: 0
