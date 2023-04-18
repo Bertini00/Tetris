@@ -601,7 +601,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5248523944892690987, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
+    - target: {fileID: 0}
       propertyPath: _SpawnLocation
       value: 
       objectReference: {fileID: 1275490812}
@@ -649,6 +649,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5438422874946193385, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
+      propertyPath: _SpawnLocation
+      value: 
+      objectReference: {fileID: 1275490812}
     - target: {fileID: 5514181533481104302, guid: 5fab3745be846f347acd3a33519aef7d, type: 3}
       propertyPath: m_Name
       value: Generator
