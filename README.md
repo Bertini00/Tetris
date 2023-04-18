@@ -18,7 +18,7 @@
 4. Check the collisions - Added a ? when checking the position of the collision
 5. The block was spawning one block over the top of the screen, if you held right or left it would go out of the screen into the abyss
 6. Save the values of the bool flag and reset it if the block doesn't move
-7. Function for rotation doesn't work well.
+7. Function for rotation doesn't work well. Apparently when the block rotate and collide, the next movement rotates again
 8. Every row moves down, must move down only the row with a greater y coordinate than the one just deleted
 9. Now after the move down I check for any collision and fix the position if the bug occurred.
 
