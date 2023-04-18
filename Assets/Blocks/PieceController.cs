@@ -60,6 +60,7 @@ public class PieceController : Piece
         if (!CheckSpawnPosition())
         {
             //Debug.Log("Cant spawn block, quitting");
+            UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
         //SetGenerator(GetComponent<GeneratorController>());
@@ -165,11 +166,11 @@ public class PieceController : Piece
             _canMoveLeft = lastMoveLeft;
             _canMoveRight = lastMoveRight;
             _blockCollided = lastBlockCollided;
-            Debug.Log("Fixing position");
+            //Debug.Log("Fixing position");
             if (!FixPosition()) 
             {
                 //Debug.Log("Can move reset");
-                Debug.Log("Position fixed");
+                //Debug.Log("Position fixed");
                 _canMoveLeft = lastMoveLeft;
                 _canMoveRight = lastMoveRight;
                 _blockCollided = lastBlockCollided;
@@ -178,7 +179,7 @@ public class PieceController : Piece
         }
         else
         {
-            Debug.Log("Can rotate and rotated");
+            //Debug.Log("Can rotate and rotated");
         }
 
         _canMoveHorizzontally = true;

@@ -60,8 +60,9 @@ public class GeneratorController : MonoBehaviour
         _blockStopped.Add(new List<BlockController> { });
         _blockStopped.Add(new List<BlockController> { });
         _blockStopped.Add(new List<BlockController> { });
-        
-        
+
+        SelectBlock();
+
         GenerateBlock();
         //Instantiate(_Line, _SpawnLocation.transform);
     }
