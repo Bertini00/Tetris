@@ -24,9 +24,9 @@
 
 # Things to add
 1. Reduce the width of the screen - **Added**
-2. Add the "next piece" part where it shows you the next piece that will come out
+2. Add the "next piece" part where it shows you the next piece that will come out - **Added**
 3. When a line is filled, delete all blocks and move everything down 1 - **Added**
-4. If the block spawned is already in collision, end the game.
+4. If the block spawned is already in collision, end the game. - **Added**
 
 # May be problems
 1. CollisionBox create with the function Physics2D.OverlapBox may not detect other block if the first collision is itself - **Fixed**
