@@ -10,6 +10,8 @@ public class GeneratorController : MonoBehaviour
 
     [SerializeField]
     private GameObject _SpawnLocation;
+    [SerializeField]
+    private GameObject _SpawnLocationNextPiece;
 
     [SerializeField]
     private Piece _Line;
@@ -27,6 +29,7 @@ public class GeneratorController : MonoBehaviour
     private Piece _TwoTwoMirrored;
 
     private Piece _activePiece;
+    private Piece _nextPiece;
 
     private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO, BlocksEnum.TWOTWOMIRRORED };
     //private BlocksEnum[] _blocks = { BlocksEnum.LINE };
@@ -148,6 +151,68 @@ public class GeneratorController : MonoBehaviour
         int n = UnityEngine.Random.Range(0, _blocks.Count());
 
         _block = _blocks[n];
+
+        if (_nextPiece != null)
+        {
+            Destroy(_nextPiece.gameObject);
+        }
+
+        switch (_block)
+        {
+            case (BlocksEnum.LINE):
+                _nextPiece = Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.LINE);
+                break;
+
+            case (BlocksEnum.SQUARE):
+                _nextPiece = Instantiate(_Square, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.SQUARE);
+                break;
+            case (BlocksEnum.L):
+                _nextPiece = Instantiate(_L, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.L);
+                break;
+            case (BlocksEnum.LMIRRORED):
+                _nextPiece = Instantiate(_LMirrored, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.LMIRRORED);
+                break;
+            case (BlocksEnum.T):
+                _nextPiece = Instantiate(_T, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.T);
+                break;
+            case (BlocksEnum.TWOTWO):
+                _nextPiece = Instantiate(_TwoTwo, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.TWOTWO);
+                break;
+            case (BlocksEnum.TWOTWOMIRRORED):
+                _nextPiece = Instantiate(_TwoTwoMirrored, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Genero blocco");
+                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
+                //Debug.Log("Blocco generato");
+                _nextPiece.SetPieceType(BlocksEnum.TWOTWOMIRRORED);
+                break;
+
+        }
+        _nextPiece.IsActive = false;
+
         //Debug.Log(_block.ToString());
     }
 

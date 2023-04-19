@@ -8,7 +8,7 @@ public class PieceController : Piece
 {
 
 
-    public bool IsActive = false;
+    
 
 
 
@@ -57,7 +57,7 @@ public class PieceController : Piece
     void Start()
     {
 
-        if (!CheckSpawnPosition())
+        if (!CheckSpawnPosition() && IsActive)
         {
             //Debug.Log("Cant spawn block, quitting");
             UnityEditor.EditorApplication.isPlaying = false;
