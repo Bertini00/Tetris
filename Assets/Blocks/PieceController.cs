@@ -8,25 +8,6 @@ public class PieceController : Piece
 {
 
 
-    
-
-
-
-    [SerializeField]
-    [Tooltip("Time to wait before the player can move")]
-    [Range(0.1f, 3f)]
-    private double _MoveDelay = 0.5;
-
-    [SerializeField]
-    [Tooltip("Time to wait before the block go down by one block")]
-    [Range(1f, 5f)]
-    private double _GoDelay = 2;
-
-    [SerializeField]
-    [Tooltip("Time to wait before the block can rotate")]
-    [Range(0.1f, 5f)]
-    private double _RotateDelay = 0.3;
-
     [Tooltip("Can move right or left")]
     private double _timeToMove;
     [Tooltip("Can go down")]
@@ -40,6 +21,8 @@ public class PieceController : Piece
     [Tooltip("If the block has reached the bottom and can't move down")]
     private bool _blocked = false;
 
+
+    //Setting each variable to its default state
     private bool _canMoveHorizzontally = true;
 
     private bool _canMoveRight = true;
@@ -50,13 +33,11 @@ public class PieceController : Piece
     private bool _blockCollided = false;
 
 
-
-
-    
     // Start is called before the first frame update
     void Start()
     {
 
+        //Check of the block can spawn, if it can't quit the game
         if (!CheckSpawnPosition() && IsActive)
         {
             //Debug.Log("Cant spawn block, quitting");
@@ -66,15 +47,13 @@ public class PieceController : Piece
         //SetGenerator(GetComponent<GeneratorController>());
 
         _timeToMove = _MoveDelay;
-
         _timeToGo = _GoDelay;
-
         _timeToRotate = _RotateDelay;
-
         _inputDelay = 0.05;
 
     }
 
+    //Reset the input delay, used to allow the piece to rotate and calculate the collision before it moving again
     private void ResetInputDelay()
     {
         _inputDelay = 0.05;
@@ -85,6 +64,8 @@ public class PieceController : Piece
     {
         if (!IsActive) return;
 
+
+        //Input controller
         if (_inputDelay <= 0)
         {
             if (_timeToGo <= 0 && !_blocked)
@@ -111,11 +92,13 @@ public class PieceController : Piece
         _inputDelay -= Time.deltaTime;
     }
 
+    //Function to move down the piece, if the block collided, it stops, otherwise it moves down by one
+    //Each time the piece moves down, the collisions reset so any OnCollisionEnter can trigger and set the variable again
     private void MoveDown()
     {
         _canMoveHorizzontally = false;
         _canRotate = false;
-        
+
         if (_blockCollided)
         {
             _bottom = true;
@@ -127,11 +110,11 @@ public class PieceController : Piece
             ResetMovementController();
             transform.position = Vector3.down * 1 + transform.position;
             _timeToMove = _MoveDelay;
-            
+
             if (!CanStay())
             {
-                
-                FixPosition();    
+
+                FixPosition();
             }
 
         }
@@ -149,6 +132,7 @@ public class PieceController : Piece
 
     }
 
+    //Function to rotate, before rotation I save the value of the current collision to reset in case the rotation is not possible
     private void Rotate()
     {
         _canMoveHorizzontally = false;
@@ -159,34 +143,30 @@ public class PieceController : Piece
         bool lastMoveRight = ResetMoveRight();
         bool lastBlockCollided = ResetBlockCollided();
         //transform.Rotate(0, 0, 360);
+        //After rotation, check if the piece can stay in the position
         if (!CanStay())
         {
-            
+
             transform.Rotate(0, 0, -90);
             _canMoveLeft = lastMoveLeft;
             _canMoveRight = lastMoveRight;
             _blockCollided = lastBlockCollided;
             //Debug.Log("Fixing position");
-            if (!FixPosition()) 
+            //Try to fix the position
+            if (!FixPosition())
             {
-                //Debug.Log("Can move reset");
-                //Debug.Log("Position fixed");
                 _canMoveLeft = lastMoveLeft;
                 _canMoveRight = lastMoveRight;
                 _blockCollided = lastBlockCollided;
             }
-            
-        }
-        else
-        {
-            //Debug.Log("Can rotate and rotated");
-        }
 
+        }
         _canMoveHorizzontally = true;
         _canMoveDown = true;
 
     }
 
+    //Move controller horizontally, reset the flag and move right of left if there is no collision
     private void MoveHorizontally(DirectionEnum direction)
     {
         if (_canMoveHorizzontally)
@@ -206,11 +186,14 @@ public class PieceController : Piece
         }
     }
 
+
+    //General move controller
     private void InputMoveController()
     {
         if (!_blocked)
         {
             _canRotate = false;
+            //Move right
             if (Input.GetKey(KeyCode.RightArrow) && _canMoveRight && _canMoveHorizzontally)
             {
                 ResetBlockCollided();
@@ -218,6 +201,7 @@ public class PieceController : Piece
                 _timeToMove = _MoveDelay;
                 ResetInputDelay();
             }
+            //Move down
             else if (Input.GetKey(KeyCode.DownArrow) && _canMoveDown)
             {
                 MoveDown();
@@ -225,6 +209,7 @@ public class PieceController : Piece
                 _timeToGo = _GoDelay;
                 ResetInputDelay();
             }
+            //Move left
             else if (Input.GetKey(KeyCode.LeftArrow) && _canMoveLeft && _canMoveHorizzontally)
             {
                 ResetBlockCollided();
@@ -236,6 +221,7 @@ public class PieceController : Piece
         }
     }
 
+    //Rotate controller, only if the piece can rotate
     private void InputRotateController()
     {
 
@@ -309,6 +295,7 @@ public class PieceController : Piece
         _blockCollided = collided;
     }
 
+    //Reset block collided and return the last value
     private bool ResetBlockCollided()
     {
         bool temp = _blockCollided;
@@ -318,6 +305,7 @@ public class PieceController : Piece
 
 
     //Check if the rotate piece can stay in that position without triggering any collision
+    //It creates a box and check if there is any other block with different parent
     private bool CanStay()
     {
         foreach (BlockController block in this.GetComponentsInChildren<BlockController>())
@@ -335,16 +323,16 @@ public class PieceController : Piece
                     //Debug.Log(this);
                     return false;
                 }
-                
+
             }
         }
         return true;
     }
 
-    //Try to adjust position up to 2 times in each direction
+    //Try to adjust position up to 2 times in each direction, returns true if the new position is valid, false otherwise
     private bool FixPosition()
     {
-        
+
         //First checks up, then on the left and right
         int[][] array = new int[8][] {
             new int[3] { 0, 1, 0 },
@@ -359,40 +347,41 @@ public class PieceController : Piece
 
         for (int i = 0; i < array.Length; i++)
         {
-            
+
             transform.Translate(array[i][0], array[i][1], 0, Space.World);
 
             if (!RotateAndCheck())
             {
-                
-                transform.Translate(-array[i][0], -array[i][1], 0, Space.World);    
+
+                transform.Translate(-array[i][0], -array[i][1], 0, Space.World);
             }
             else
             {
                 //Debug.Log("Position found");
-                
+
                 return true;
             }
         }
-        
+
         return false;
 
     }
 
-    //Returns true if the piece can stay where it is
+    //Returns true if the piece can stay where it is after rotation
     private bool RotateAndCheck()
     {
-        
+
         transform.Rotate(0, 0, 90);
         if (!CanStay())
         {
-            
+
             transform.Rotate(0, 0, -90);
             return false;
         }
         return true;
     }
 
+    //Checks if the block can spawn without triggering any collision
     private bool CheckSpawnPosition()
     {
         Collider2D[] occupants = Physics2D.OverlapBoxAll(transform.position, Vector2.zero, 0f, LayerMask.GetMask("Block"));
@@ -401,12 +390,10 @@ public class PieceController : Piece
         {
             if (occupant != null && occupant.transform.parent != transform)
             {
-                Debug.Log("Occupant found, not myself");
-                //Debug.Log(occupant.transform.parent);
-                //Debug.Log(this);
+
                 return false;
             }
-            
+
         }
         return true;
     }

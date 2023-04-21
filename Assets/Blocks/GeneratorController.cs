@@ -28,7 +28,10 @@ public class GeneratorController : MonoBehaviour
     [SerializeField]
     private Piece _TwoTwoMirrored;
 
+    //Current active piece
     private Piece _activePiece;
+
+    //Next piece
     private Piece _nextPiece;
 
     private BlocksEnum[] _blocks = { BlocksEnum.LINE, BlocksEnum.SQUARE, BlocksEnum.L, BlocksEnum.LMIRRORED, BlocksEnum.T, BlocksEnum.TWOTWO, BlocksEnum.TWOTWOMIRRORED };
@@ -72,67 +75,34 @@ public class GeneratorController : MonoBehaviour
         //Instantiate(_Line, _SpawnLocation.transform);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    //Instantiate the next block
+    //Instantiate the next block selected randomly
     private void GenerateBlock()
     {
-
 
         switch (_block)
         {
             case (BlocksEnum.LINE):
                 _activePiece = Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.LINE);
                 break;
 
             case (BlocksEnum.SQUARE):
                 _activePiece = Instantiate(_Square, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.SQUARE);
                 break;
+
             case (BlocksEnum.L):
                 _activePiece = Instantiate(_L, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.L);
                 break;
             case (BlocksEnum.LMIRRORED):
                 _activePiece = Instantiate(_LMirrored, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.LMIRRORED);
                 break;
             case (BlocksEnum.T):
                 _activePiece = Instantiate(_T, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.T);
                 break;
             case (BlocksEnum.TWOTWO):
                 _activePiece = Instantiate(_TwoTwo, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.TWOTWO);
                 break;
             case (BlocksEnum.TWOTWOMIRRORED):
                 _activePiece = Instantiate(_TwoTwoMirrored, _SpawnLocation.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocation.transform);
-                //Debug.Log("Blocco generato");
-                _activePiece.SetPieceType(BlocksEnum.TWOTWOMIRRORED);
                 break;
 
         }
@@ -144,7 +114,8 @@ public class GeneratorController : MonoBehaviour
         SelectBlock();
 
     }
-    //Select randomly which block will be the next
+    //Select randomly which piece will be the next and create 
+    //the block on the right side of the screen to show the next piece
     private void SelectBlock()
     {
 
@@ -152,6 +123,7 @@ public class GeneratorController : MonoBehaviour
 
         _block = _blocks[n];
 
+        //Destroy the last block if it's not the first time creating it
         if (_nextPiece != null)
         {
             Destroy(_nextPiece.gameObject);
@@ -161,70 +133,47 @@ public class GeneratorController : MonoBehaviour
         {
             case (BlocksEnum.LINE):
                 _nextPiece = Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.LINE);
                 break;
 
             case (BlocksEnum.SQUARE):
                 _nextPiece = Instantiate(_Square, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.SQUARE);
                 break;
             case (BlocksEnum.L):
                 _nextPiece = Instantiate(_L, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.L);
                 break;
             case (BlocksEnum.LMIRRORED):
                 _nextPiece = Instantiate(_LMirrored, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.LMIRRORED);
                 break;
             case (BlocksEnum.T):
                 _nextPiece = Instantiate(_T, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.T);
                 break;
             case (BlocksEnum.TWOTWO):
                 _nextPiece = Instantiate(_TwoTwo, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.TWOTWO);
                 break;
             case (BlocksEnum.TWOTWOMIRRORED):
                 _nextPiece = Instantiate(_TwoTwoMirrored, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Genero blocco");
-                //Instantiate(_Line, _SpawnLocationNextPiece.transform);
-                //Debug.Log("Blocco generato");
-                _nextPiece.SetPieceType(BlocksEnum.TWOTWOMIRRORED);
                 break;
 
         }
+
+        //Set the piece as inactive so it doesn't move
         _nextPiece.IsActive = false;
 
         //Debug.Log(_block.ToString());
     }
 
+    //Function called when the current block stops. Generate the collision,
+    //add the block to the array to check and generate another block
     public void BlockStopped(PieceController piece)
     {
         //Debug.Log("Block stopped");
         GenerateCollision();
         AddBlocksToArray(piece);
-        
+
         GenerateBlock();
     }
 
+    //Generate the collision on top for each block of the piece
     public void GenerateCollision()
     {
         foreach (BlockController block in _activePiece.GetComponentsInChildren<BlockController>())
@@ -234,6 +183,8 @@ public class GeneratorController : MonoBehaviour
         }
     }
 
+    //Add each block to the row and then check if the row has been completed
+    //If the row is completed, delete the row
     private void AddBlocksToArray(PieceController piece)
     {
         //Debug.Log("Block stopped dimension " + _blockStopped.Count);
@@ -241,11 +192,9 @@ public class GeneratorController : MonoBehaviour
         foreach (BlockController block in piece.GetComponentsInChildren<BlockController>())
         {
             //Debug.Log(block);
-            //y+4.5
+            //y+4.5 - Offset of the y axis
             int currY = (int)System.Math.Round(block.transform.position.y + 4.5);
-            //Debug.Log(currY);
             _blockStopped[currY].Add(block);
-            //Debug.Log(_blockStopped[currY].Count);
             if (_blockStopped[currY].Count == 10)
             {
                 //Debug.Log("Row Completed");
@@ -259,6 +208,8 @@ public class GeneratorController : MonoBehaviour
         }
     }
 
+    //Deletes the row and notify each block in the rows on top of the row deleted
+    //Then rearrenges the rows
     private void DeleteRows(List<int> rows)
     {
         int temp = 0;
@@ -275,6 +226,8 @@ public class GeneratorController : MonoBehaviour
         RearrengeRows(rows);
     }
 
+    //Rearrenges the arrays of rows, removing the empty rows and moving each row on top of the rows
+    //just deleted down by one
     private void RearrengeRows(List<int> rows)
     {
         List<List<BlockController>> temp = new();
@@ -285,11 +238,12 @@ public class GeneratorController : MonoBehaviour
                 temp.Add(_blockStopped[i]);
             }
         }
+
         for (int i = 0; i < rows.Count; i++)
         {
             temp.Add(new List<BlockController>());
         }
-        
+
         _blockStopped = temp;
     }
 }

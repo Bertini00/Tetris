@@ -6,25 +6,27 @@ public class Piece : MonoBehaviour
 {
 
 
+    [SerializeField]
+    [Tooltip("Time to wait before the player can move")]
+    [Range(0.1f, 3f)]
+    public double _MoveDelay = 0.5;
+
+    [SerializeField]
+    [Tooltip("Time to wait before the block go down by one block")]
+    [Range(1f, 5f)]
+    public double _GoDelay = 2;
+
+    [SerializeField]
+    [Tooltip("Time to wait before the block can rotate")]
+    [Range(0.1f, 5f)]
+    public double _RotateDelay = 0.3;
+
     [Tooltip("Generator of the level")]
     private GeneratorController _generator;
 
     private BlocksEnum _pieceType;
 
     public bool IsActive = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetGenerator(GeneratorController generator)
     {
         _generator = generator;
@@ -37,10 +39,4 @@ public class Piece : MonoBehaviour
         Debug.Log(s);
     }
 
-    public void SetPieceType(BlocksEnum type)
-    {
-        _pieceType = type;
-    }
-
-    public BlocksEnum GetPieceType() { return _pieceType; }
 }
