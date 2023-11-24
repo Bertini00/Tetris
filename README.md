@@ -1,4 +1,13 @@
 # Tetris
+## Description
+Simple Tetris game made in unity. No extra library included.
+This project was made as an homework for the Mobile course of the Master in computer game development.
+
+## Controls
+Arrow keys L/R to move Left or Right
+Arrow key Up to rotate the piece
+Arrow key Down to move the piece down
+
 
 # Issues
 1. Rotation often cause the piece to break, it goes inside other block or out of the screen **Fixed**
