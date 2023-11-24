@@ -2,7 +2,7 @@
 ## Description
 Simple Tetris game made in unity. No extra library included.
 
-This project was made as an homework for the Mobile course of the Master in computer game development.
+This project was made as an homework for the Unity course of the Master in computer game development.
 
 ## Controls
 Arrow keys L/R to move Left or Right
